@@ -49,14 +49,17 @@ const socialMediaLinks = {
 
 const skillsSection = {
   title: "What I do",
-  subTitle: "CRAZY FULL STACK DEVELOPER WHO WANTS TO EXPLORE EVERY TECH STACK",
+  subTitle: "CRAZY DEVOPS ENGINNER WHO WANTS TO EXPLORE EVERY TECH AUTOMATION",
   skills: [
     emoji(
-      "⚡ Develop highly interactive Front end / User Interfaces for your web and mobile applications"
+      "⚡ Develop highly secure and robust cloud infrastructure for clients to operate their business."
     ),
-    emoji("⚡ Progressive Web Applications ( PWA ) in normal and SPA Stacks"),
+    emoji("⚡ Product lifecycle management."),
+    emoji("⚡ Enterprise application integration."),
+    emoji("⚡ Product release and deployment support."),
+    emoji("⚡ Custom web applications deployment with implementation of CI/CD ."),
     emoji(
-      "⚡ Integration of third party services such as Firebase/ AWS / Digital Ocean"
+      "⚡ Integration of third party services such as GitHub/ Jenkins / Docker / Cloud (AWS,Azure,GCP)"
     )
   ],
 
@@ -69,8 +72,12 @@ https://fontawesome.com/icons?d=gallery */
       fontAwesomeClassname: "fab fa-jenkins"
     },
     {
-      skillName: "Ansible",
-      fontAwesomeClassname: "fab fa-ansible"
+      skillName: "GitHub",
+      fontAwesomeClassname: "fab fa-github"
+    },
+    {
+      skillName: "Bitbucket",
+      fontAwesomeClassname: "fab fa-bitbucket"
     },
     {
       skillName: "JavaScript",
@@ -101,12 +108,16 @@ https://fontawesome.com/icons?d=gallery */
       fontAwesomeClassname: "fab fa-google"
     },
     {
-      skillName: "python",
+      skillName: "Python",
       fontAwesomeClassname: "fab fa-python"
     },
     {
-      skillName: "docker",
+      skillName: "Docker",
       fontAwesomeClassname: "fab fa-docker"
+    },
+    {
+      skillName: "AEMaaCS",
+      fontAwesomeClassname: "fab fa-adobe"
     }
   ],
   display: true // Set false to hide this section, defaults to true
@@ -118,23 +129,12 @@ const educationInfo = {
   display: true, // Set false to hide this section, defaults to true
   schools: [
     {
-      schoolName: "Harvard University",
-      logo: require("./assets/images/harvardLogo.png"),
-      subHeader: "Master of Science in Computer Science",
-      duration: "September 2017 - April 2019",
-      desc: "Participated in the research of XXX and published 3 papers.",
-      descBullets: [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-      ]
-    },
-    {
-      schoolName: "Stanford University",
-      logo: require("./assets/images/stanfordLogo.png"),
-      subHeader: "Bachelor of Science in Computer Science",
-      duration: "September 2013 - April 2017",
-      desc: "Ranked top 10% in the program. Took courses about Software Engineering, Web Security, Operating Systems, ...",
-      descBullets: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit"]
+      schoolName: "Nagpur University",
+      logo: require("./assets/images/Nagpur-University-new.png"),
+      subHeader: "Bachelor of Engineering in Computer Science",
+      duration: "September 2012 - April 2016",
+      desc: "Overall Scored CGPA 8.07 on a scal of 10, in my 4 years of engineering academic.",
+//      descBullets: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit"]
     }
   ]
 };
@@ -145,11 +145,11 @@ const techStack = {
   viewSkillBars: true, //Set it to true to show Proficiency Section
   experience: [
     {
-      Stack: "Frontend/Design", //Insert stack or technology you have experience in
+      Stack: "Continuous Integration and Continuous Deployment", //Insert stack or technology you have experience in
       progressPercentage: "90%" //Insert relative proficiency in percentage
     },
     {
-      Stack: "Backend",
+      Stack: "Cloud Migration",
       progressPercentage: "70%"
     },
     {
@@ -166,10 +166,10 @@ const workExperiences = {
   display: true, //Set it to true to show workExperiences Section
   experience: [
     {
-      role: "Software Engineer",
-      company: "Facebook",
+      role: "DevOps & Cloud Engineer",
+      company: "Perficient Inc",
       companylogo: require("./assets/images/facebookLogo.png"),
-      date: "June 2018 – Present",
+      date: "June 2021 – Present",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       descBullets: [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
