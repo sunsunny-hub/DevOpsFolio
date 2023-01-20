@@ -84,15 +84,15 @@ https://fontawesome.com/icons?d=gallery */
       fontAwesomeClassname: "fab fa-js"
     },
     {
-      skillName: "nodejs",
+      skillName: "Nodejs",
       fontAwesomeClassname: "fab fa-node"
     },
     {
-      skillName: "npm",
+      skillName: "NPM",
       fontAwesomeClassname: "fab fa-npm"
     },
     {
-      skillName: "sql-database",
+      skillName: "SQL-database",
       fontAwesomeClassname: "fas fa-database"
     },
     {
@@ -168,12 +168,12 @@ const workExperiences = {
     {
       role: "DevOps & Cloud Engineer",
       company: "Perficient Inc",
-      companylogo: require("./assets/images/facebookLogo.png"),
+      companylogo: require("./assets/images/Perficient-Logo.jpg"),
       date: "June 2021 – Present",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      desc: "Working on various client's project, per client requirements need to development and automation",
       descBullets: [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+        "Implementation of CI/CD with DevSecOps methodology",
+        "Setup of Triggers and Scheduler for the automation."
       ]
     },
     {
