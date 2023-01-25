@@ -184,7 +184,7 @@ const workExperiences = {
     {
       role: "Linux Administrator",
       company: "Altius Customer Service Pvt Ltd",
-      companylogo: require("./assets/images/altius-logo.jpg"),
+      companylogo: require("./assets/images/altius-logo.png"),
       date: "Nov 2019 – Sep 2021",
       desc: "Monitored and Handled the on-prem infrastructure servers as well as cloud infrastructure. Configuration of server-side applications such as Apache2, MySQL 5.7, and Tomcat 8/9.",
       descBullets: [
@@ -195,7 +195,7 @@ const workExperiences = {
     {
       role: "Technical Support L1",
       company: "Concentrix Pvt Ltd",
-      companylogo: require("./assets/images/concentrix-logo.jpg"),
+      companylogo: require("./assets/images/concentrix-logo.png"),
       date: "Mar 2018 – Apr 2019",
       desc: "Worked as Technical support for DELL, it was an inbound process B to C. My job was to troubleshoot and resolve the customer laptop hardware issue on call.",
       descBullets: [
