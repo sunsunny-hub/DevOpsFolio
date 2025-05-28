@@ -26,7 +26,7 @@ const greeting = {
     "A passionate DevOps Engineer 🚀 having an experience of building complete infrastructure using IaC and CI/CD pipeline using global tools and cloud devops tools."
   ),
   resumeLink:
-    "https://drive.google.com/file/d/1sbxGJcOT_fXSw-IcYt37_xMNj1XNrLot/view?usp=sharing", // Set to empty to hide the button
+    "https://drive.google.com/file/d/12Ztb_acOKf_slRDkL023qwlaAQzc2xz_/view?usp=drive_link", // Set to empty to hide the button
   displayGreeting: true // Set false to hide this section, defaults to true
 };
 
@@ -212,7 +212,7 @@ To know how to get github key look at readme.md */
 
 const openSource = {
   showGithubProfile: "true", // Set tru2e or false to show Contact profile using Github, defaults to true
-  display: true // Set false to hide this section, defaults to true
+  display: false // Set false to hide this section, defaults to true
 };
 
 // Some big projects you have worked on
@@ -388,7 +388,7 @@ const twitterDetails = {
   display: true // Set true to display this section, defaults to false
 };
 
-const isHireable = false; // Set false if you are not looking for a job. Also isHireable will be display as Open for opportunities: Yes/No in the GitHub footer
+const isHireable = true; // Set false if you are not looking for a job. Also isHireable will be display as Open for opportunities: Yes/No in the GitHub footer
 
 export {
   illustration,
