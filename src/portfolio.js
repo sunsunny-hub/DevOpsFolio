@@ -148,12 +148,32 @@ const techStack = {
   viewSkillBars: true, //Set it to true to show Proficiency Section
   experience: [
     {
+      Stack: "Product lifecycle management", //Insert stack or technology you have experience in
+      progressPercentage: "90%" //Insert relative proficiency in percentage
+    },
+    {
+      Stack: "Product release and deployment support", //Insert stack or technology you have experience in
+      progressPercentage: "90%" //Insert relative proficiency in percentage
+    },
+    {
+      Stack: "Custom web applications deployment on mircoservices", //Insert stack or technology you have experience in
+      progressPercentage: "90%" //Insert relative proficiency in percentage
+    },
+    {
       Stack: "Continuous Integration and Continuous Deployment", //Insert stack or technology you have experience in
       progressPercentage: "90%" //Insert relative proficiency in percentage
     },
     {
       Stack: "Cloud Migration",
       progressPercentage: "70%"
+    },
+    {
+      Stack: "Robotic Process Automation",
+      progressPercentage: "70%"
+    },
+    {
+      Stack: "Terraform",
+      progressPercentage: "80%"
     },
     {
       Stack: "Programming",
@@ -211,8 +231,8 @@ const workExperiences = {
 To know how to get github key look at readme.md */
 
 const openSource = {
-  showGithubProfile: "true", // Set tru2e or false to show Contact profile using Github, defaults to true
-  display: false // Set false to hide this section, defaults to true
+  showGithubProfile: true, // Set tru2e or false to show Contact profile using Github, defaults to true
+  display: true // Set false to hide this section, defaults to true
 };
 
 // Some big projects you have worked on
@@ -221,6 +241,54 @@ const bigProjects = {
   title: "Big Projects",
   subtitle: "SOME CLIENTS AND COMPANIES THAT I HELPED TO CREATE THEIR TECH",
   projects: [
+    {
+      image: require("./assets/images/Qualcomm-Logo.png"),
+      projectName: "Qualcomm [Okta Migration]",
+      projectDesc: "This project is based on okta services for managing and securing their identities. Qualcomm operates a high-traffic application that relies on APIs interact with various okta workflows, needs to manage and migrate those okta workflows from lower environment to higher with automation.",
+      footerLink: [
+        {
+          name: "Visit Website",
+          url: "https://www.qualcomm.com/"
+        }
+        //  you can add extra buttons here.
+      ]
+    },
+    {
+      image: require("./assets/images/Qualcomm-Logo.png"),
+      projectName: "Qualcomm [Apigee Hybrid Upgrade]",
+      projectDesc: "This project is based on Google Apigee Hybrid Service for managing and securing their APIs. Qualcomm operates a high-traffic application that relies on APIs interact with various services, including payment gateways, user authentication, and data analytics",
+      footerLink: [
+        {
+          name: "Visit Website",
+          url: "https://www.qualcomm.com/"
+        }
+        //  you can add extra buttons here.
+      ]
+    },
+    {
+      image: require("./assets/images/leadiant-logo.png"),
+      projectName: "Leadiant Biosciences",
+      projectDesc: "Supporting and managing the client infra structure in AWS cloud along side oracle argus safety applicationa and transaction gateway application Axway B2Bi",
+      footerLink: [
+        {
+          name: "Visit Website",
+          url: "https://buildingdetroit.org/"
+        }
+        //  you can add extra buttons here.
+      ]
+    },
+    {
+      image: require("./assets/images/ruralking-logo.jpg"),
+      projectName: "RK Holdings, LLP",
+      projectDesc: "This project was green field project, need to setup complete AWS architecture from scratch, for all the environments.",
+      footerLink: [
+        {
+          name: "Visit Website",
+          url: "https://buildingdetroit.org/"
+        }
+        //  you can add extra buttons here.
+      ]
+    },
     {
       image: require("./assets/images/dlba-logo.png"),
       projectName: "DLBA - Detroit Land Bank Authority",
@@ -317,16 +385,40 @@ const blogSection = {
   displayMediumBlogs: true, // Set true to display fetched medium blogs instead of hardcoded ones
   blogs: [
     {
-      url: "https://sunsbeelog.blogspot.com/2022/07/transform-your-data-with-azure-data.html",
+      url: "https://blogs.perficient.com/2025/05/27/azure-iot-operations-empowering-the-future-of-connectivity-and-automation/",
+      title: "Azure IoT Operations: Empowering the Future of Connectivity and Automation",
+      description:
+        "You wont find much article on matillion tool, here I bring you the matillion ETL tool to start off. 5-10 min read"
+    },
+    {
+      url: "https://blogs.perficient.com/2024/07/05/revolutionizing-openai-chatbot-ui-deployment-with-devsecops/",
+      title: "Revolutionizing OpenAI Chatbot UI Deployment with DevSecOps",
+      description:
+        "You wont find much article on matillion tool, here I bring you the matillion ETL tool to start off. 5-10 min read"
+    },
+    {
+      url: "https://blogs.perficient.com/2024/07/02/ultimate-guide-to-setting-up-jenkins-server-with-devsecops-tools-on-aws-ec2/",
+      title: "Ultimate Guide to Setting Up Jenkins Server with DevSecOps Tools on AWS EC2.",
+      description:
+        "You wont find much article on matillion tool, here I bring you the matillion ETL tool to start off. 5-10 min read"
+    },
+    {
+      url: "https://blogs.perficient.com/2023/07/13/deploying-azure-infrastructure-with-terraform-using-azure-devops-pipelines/",
+      title: "Deploying Azure Infrastructure With Terraform Using Azure DevOps Pipelines",
+      description:
+        "You wont find much article on matillion tool, here I bring you the matillion ETL tool to start off. 5-10 min read"
+    },
+    {
+      url: "https://blogs.perficient.com/2022/05/24/getting-started-with-matillion-etl-tool/",
+      title: "Getting Started with Matillion ETL Tool",
+      description:
+        "You wont find much article on matillion tool, here I bring you the matillion ETL tool to start off. 5-10 min read"
+    },
+    {
+      url: "https://blogs.perficient.com/2021/12/08/azure-data-factory-overview/",
       title: "Transform Your Data with Azure Data Factory",
       description:
         "All about ADF which you should know, the ETL fundamental. 5-10 min read"
-    },
-    {
-      url: "https://sunsbeelog.blogspot.com/2022/07/getting-started-with-matillion-etl-tool.html",
-      title: "Getting Started with Matillion ETL Tool",
-      description:
-        "You wont find much article on matillion tool, here i bring you the matillion ETL tool to start off. 5-10 min read"
     }
   ],
   display: true // Set false to hide this section, defaults to true
