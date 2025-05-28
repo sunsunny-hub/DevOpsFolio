@@ -114,10 +114,6 @@ https://fontawesome.com/icons?d=gallery */
     {
       skillName: "Docker",
       fontAwesomeClassname: "fab fa-docker"
-    },
-    {
-      skillName: "AEMaaCS",
-      fontAwesomeClassname: "fab fa-adobe"
     }
   ],
   display: true // Set false to hide this section, defaults to true
