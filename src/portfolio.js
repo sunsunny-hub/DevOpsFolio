@@ -278,7 +278,7 @@ const bigProjects = {
       ]
     },
     {
-      image: require("./assets/images/ruralking-logo.jpg"),
+      image: require("./assets/images/ruralking-logo.png"),
       projectName: "RK Holdings, LLP",
       projectDesc: "This project was green field project, need to setup complete AWS architecture from scratch, for all the environments.",
       footerLink: [
