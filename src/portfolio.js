@@ -114,10 +114,6 @@ https://fontawesome.com/icons?d=gallery */
     {
       skillName: "Docker",
       fontAwesomeClassname: "fab fa-docker"
-    },
-    {
-      skillName: "AEMaaCS",
-      fontAwesomeClassname: "fab fa-adobe"
     }
   ],
   display: true // Set false to hide this section, defaults to true
@@ -369,6 +365,18 @@ const achievementSection = {
         {
           name: "Certification", 
           url: "https://www.credly.com/earner/earned/badge/53d13878-236f-4242-af6d-ac20752cdc84"
+        },
+      ]
+    },
+    {
+      title: "Microsoft Certified: Azure Security Engineer Associate",
+      subtitle: "Demonstrate the skills needed to implement security controls, maintain an organization’s security posture, and identify and remediate security vulnerabilities.",
+      image: require("./assets/images/az-500.png"),
+      imageAlt: "Azure Badge",
+      footerLink: [
+        {
+          name: "Certification", 
+          url: "https://learn.microsoft.com/api/credentials/share/en-us/surajsingh-5992/5A930C5769F8C404?sharingId=442D4838F487B16A"
         },
       ]
     }
