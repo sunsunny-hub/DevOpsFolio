@@ -1,0 +1,26 @@
+trigger: none
+
+pr:
+  branches:
+    include:
+      - '*'
+
+jobs:
+  - job: AnalyzePR
+    displayName: 'Analyze Pull Request with Azure OpenAI'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - checkout: self
+
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.x'
+          addToPath: true
+
+      - script: python analyze_pr.py
+        displayName: 'Run Analysis Script'
+        env:
+          AZURE_OPENAI_ENDPOINT: $(AZURE_OPENAI_ENDPOINT)
+          AZURE_OPENAI_API_KEY: $(AZURE_OPENAI_API_KEY)
+          GITHUB_TOKEN: $(GITHUB_TOKEN)
