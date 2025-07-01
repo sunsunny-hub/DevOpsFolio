@@ -17,6 +17,9 @@ jobs:
         inputs:
           versionSpec: '3.x'
           addToPath: true
+        
+      - script: pip install requests
+        displayName: 'Install requests package'
 
       - script: python analyze_pr.py
         displayName: 'Run Analysis Script'
