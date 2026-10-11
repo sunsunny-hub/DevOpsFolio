@@ -261,7 +261,7 @@ export const portfolioData = {
       company: "Concentrix Pvt Ltd",
       role: "Technical Support Specialist L1",
       period: "Mar 2018 – Apr 2019",
-      location: "Nagpur, India",
+      location: "Pune, India",
       logo: "/images/concentrix-logo.png",
       featured: false,
       summary: "Provided tier-1 enterprise technical hardware & software support for Dell corporate client systems.",
