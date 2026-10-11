@@ -8,6 +8,8 @@
 # testing
 /coverage
 /build
+/dist
+/legacy_cra_backup
 
 
 # misc
