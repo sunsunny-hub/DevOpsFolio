@@ -1,0 +1,107 @@
+[
+  {
+    "id": "25aac7c5-872a-45b6-be77-ee314bf21844",
+    "title": "Hands On Essentials - Data Lake",
+    "subtitle": "This Hands On Workshop covers tools and techniques for accessing and analyzing non-loaded data (aka data in a Data Lake). It also covers tools and techniques for making use of Unstructured Data (images in particular). Finally, it provides hands on experience with two GeoSpatial Data Types (GeoJSON and WKT) including the use of several Snowflake GeoSpatial Functions and the writing of a User Defined Function that leverages existing GeoSpatial functions.",
+    "image": "https://images.credly.com/images/9904ec90-122c-43cd-8b66-5a7e6c920862/image.png",
+    "imageAlt": "Hands On Essentials - Data Lake",
+    "issuedAt": "2023-09-29",
+    "expiresAt": null,
+    "footerLink": [
+      {
+        "name": "Certification",
+        "url": "https://www.credly.com/badges/25aac7c5-872a-45b6-be77-ee314bf21844/public_url"
+      }
+    ]
+  },
+  {
+    "id": "c5007d68-9aa9-41ad-80af-dc04fb90104e",
+    "title": "Hands On Essentials - Data Engineering",
+    "subtitle": "The 5th Badge in the Hands On Essentials Series, this workshop covers some advanced concepts needed by those who want to work toward the job title of Data Engineer.",
+    "image": "https://images.credly.com/images/50dd7645-1e56-4e53-a1e0-b17dc7cca3c1/image.png",
+    "imageAlt": "Hands On Essentials - Data Engineering",
+    "issuedAt": "2023-09-17",
+    "expiresAt": null,
+    "footerLink": [
+      {
+        "name": "Certification",
+        "url": "https://www.credly.com/badges/c5007d68-9aa9-41ad-80af-dc04fb90104e/public_url"
+      }
+    ]
+  },
+  {
+    "id": "d4c842c4-9c89-4949-afe3-b3288c79edf3",
+    "title": "Hands On Essentials - Data Warehouse",
+    "subtitle": "The Data Warehouse badge is the first badge in Snowflake's Hands On Essentials Series. Users earning this credential have completed coursework, passed a written exam and scored 90% or better on submitted project work. Topics covered: User Roles, Navigation, Creating Database Objects, Virtual Warehouse creation and configuration, loading and querying CSV and JSON data.",
+    "image": "https://images.credly.com/images/97fcc871-a820-4143-adf2-62517026cb58/Essentials-Data-Warehouse_2x.png",
+    "imageAlt": "Hands On Essentials - Data Warehouse",
+    "issuedAt": "2023-09-13",
+    "expiresAt": null,
+    "footerLink": [
+      {
+        "name": "Certification",
+        "url": "https://www.credly.com/badges/d4c842c4-9c89-4949-afe3-b3288c79edf3/public_url"
+      }
+    ]
+  },
+  {
+    "id": "07ecd1e8-5da8-42a5-bd01-9d7e5a608da2",
+    "title": "Microsoft Certified: Azure Fundamentals",
+    "subtitle": "Earners of the Azure Fundamentals certification have demonstrated foundational level knowledge of cloud services and how those services are provided with Microsoft Azure.",
+    "image": "https://images.credly.com/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png",
+    "imageAlt": "Microsoft Certified: Azure Fundamentals",
+    "issuedAt": "2021-11-29",
+    "expiresAt": null,
+    "footerLink": [
+      {
+        "name": "Certification",
+        "url": "https://www.credly.com/badges/07ecd1e8-5da8-42a5-bd01-9d7e5a608da2/public_url"
+      }
+    ]
+  },
+  {
+    "id": "f2aef1f0-4ba3-4950-878f-7d6b8e36fc6f",
+    "title": "Associate Cloud Engineer Certification",
+    "subtitle": "Associate Cloud Engineers deploy applications, monitor operations, and manage enterprise solutions. They use Google Cloud Console and the command-line interface to perform common platform-based tasks to maintain one or more deployed solutions that leverage Google-managed or self-managed services on Google Cloud.",
+    "image": "https://images.credly.com/images/08096465-cbfc-4c3e-93e5-93c5aa61f23e/image.png",
+    "imageAlt": "Associate Cloud Engineer Certification",
+    "issuedAt": "2023-01-12",
+    "expiresAt": "2026-09-01",
+    "footerLink": [
+      {
+        "name": "Certification",
+        "url": "https://www.credly.com/badges/f2aef1f0-4ba3-4950-878f-7d6b8e36fc6f/public_url"
+      }
+    ]
+  },
+  {
+    "id": "78a1103c-ecf2-4a6c-9932-565bf2b6591e",
+    "title": "AWS Certified Solutions Architect – Associate",
+    "subtitle": "Earners of this certification have a comprehensive understanding of AWS services and technologies. They demonstrated the ability to build secure and robust solutions using architectural design principles based on customer requirements. Badge owners are able to strategically design well-architected distributed systems that are scalable, resilient, efficient, and fault-tolerant.",
+    "image": "https://images.credly.com/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png",
+    "imageAlt": "AWS Certified Solutions Architect – Associate",
+    "issuedAt": "2021-12-19",
+    "expiresAt": "2024-12-19",
+    "footerLink": [
+      {
+        "name": "Certification",
+        "url": "https://www.credly.com/badges/78a1103c-ecf2-4a6c-9932-565bf2b6591e/public_url"
+      }
+    ]
+  },
+  {
+    "id": "53d13878-236f-4242-af6d-ac20752cdc84",
+    "title": "Microsoft Certified: Azure Administrator Associate",
+    "subtitle": "Earning Azure Administrator Associate certification validates the skills and knowledge to implement, manage, and monitor an organization’s Microsoft Azure environment. Candidates have a deep understanding of each implementing, managing, and monitoring identity, governance, storage, compute, and virtual networks in a cloud environment, plus provision, size, monitor, and adjust resources, when needed.",
+    "image": "https://images.credly.com/images/336eebfc-0ac3-4553-9a67-b402f491f185/azure-administrator-associate-600x600.png",
+    "imageAlt": "Microsoft Certified: Azure Administrator Associate",
+    "issuedAt": "2022-03-15",
+    "expiresAt": "2023-03-15",
+    "footerLink": [
+      {
+        "name": "Certification",
+        "url": "https://www.credly.com/badges/53d13878-236f-4242-af6d-ac20752cdc84/public_url"
+      }
+    ]
+  }
+]

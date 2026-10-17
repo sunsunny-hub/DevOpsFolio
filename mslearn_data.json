@@ -1,0 +1,99 @@
+{
+  "username": "surajsingh-5992",
+  "profileUrl": "https://learn.microsoft.com/en-us/users/surajsingh-5992/",
+  "displayName": "Suraj Singh Thakur",
+  "avatarUrl": "https://learn.microsoft.com/api/profile-avatar-storage/images/FlgS89l-SE2hxM4KSv38jw.png?8DC4EE",
+  "reputationPoints": 21,
+  "level": 13,
+  "totalXp": 351400,
+  "currentLevelLow": 332000,
+  "currentLevelHigh": 483199,
+  "badgesCount": 251,
+  "trophiesCount": 37,
+  "learningPaths": [
+    {
+      "id": "U7LKZ9R3",
+      "title": "Enhance business workflows with AI",
+      "grantedOn": "2026-10-06",
+      "url": "https://learn.microsoft.com/en-us/training/paths/transform-business-workflows-with-ai/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/generic-trophy.svg"
+    },
+    {
+      "id": "EGZN6MWP",
+      "title": "Build foundational generative AI skills",
+      "grantedOn": "2026-10-06",
+      "url": "https://learn.microsoft.com/en-us/training/paths/explore-microsoft-365-copilot-business-chat/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/generic-trophy.svg"
+    },
+    {
+      "id": "H2KMEHB8",
+      "title": "GitHub Copilot Fundamentals Part 2 of 2",
+      "grantedOn": "2026-08-08",
+      "url": "https://learn.microsoft.com/en-us/training/paths/gh-copilot-2/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/intro-github-copilot.svg"
+    },
+    {
+      "id": "9AEZV9XU",
+      "title": "GitHub Copilot Fundamentals Part 1 of 2",
+      "grantedOn": "2026-08-08",
+      "url": "https://learn.microsoft.com/en-us/training/paths/copilot/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/intro-github-copilot.svg"
+    },
+    {
+      "id": "H2KAGPW8",
+      "title": "Extract insights from visual data on Azure",
+      "grantedOn": "2026-08-07",
+      "url": "https://learn.microsoft.com/en-us/training/paths/insight-visual-data/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/generic-badge.svg"
+    },
+    {
+      "id": "D3YCQNQJ",
+      "title": "Develop computer vision solutions with Microsoft Foundry",
+      "grantedOn": "2026-08-07",
+      "url": "https://learn.microsoft.com/en-us/training/paths/develop-computer-vision-with-foundry/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/generic-badge.svg"
+    },
+    {
+      "id": "8VB76PTW",
+      "title": "Develop natural language solutions in Azure",
+      "grantedOn": "2026-08-07",
+      "url": "https://learn.microsoft.com/en-us/training/paths/develop-language-solutions-azure-ai/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/create-language-solution-azure-cognitive-services.svg"
+    },
+    {
+      "id": "7D64NSAZ",
+      "title": "Develop AI agents on Azure",
+      "grantedOn": "2026-08-07",
+      "url": "https://learn.microsoft.com/en-us/training/paths/develop-ai-agents-azure/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/generic-badge.svg"
+    },
+    {
+      "id": "P6W5ZU54",
+      "title": "Develop generative AI apps in Azure",
+      "grantedOn": "2026-08-07",
+      "url": "https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/generic-badge.svg"
+    },
+    {
+      "id": "WMD7BKWN",
+      "title": "Architect AI solutions for business productivity",
+      "grantedOn": "2026-08-07",
+      "url": "https://learn.microsoft.com/en-us/training/paths/architect-agentic-ai-business-solutions/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/generic-trophy.svg"
+    },
+    {
+      "id": "ET8NZNQP",
+      "title": "Develop Generative AI solutions with Azure OpenAI Service",
+      "grantedOn": "2024-06-10",
+      "url": "https://learn.microsoft.com/en-us/training/paths/develop-ai-solutions-azure-openai/",
+      "imageUrl": "https://learn.microsoft.com/training/achievements/develop-ai-solutions-azure-openai.svg"
+    },
+    {
+      "id": "C3T7PG79",
+      "title": "AZ-400: Implement security and validate code bases for compliance",
+      "grantedOn": "2024-03-28",
+      "url": "https://learn.microsoft.com/en-us/training/paths/az-400-implement-security-validate-code-bases-compliance/",
+      "imageUrl": "https://learn.microsoft.com/learn/achievements/implement-security-and-validate-code-bases-for-compliance.svg"
+    }
+  ]
+}
