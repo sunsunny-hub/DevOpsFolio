@@ -40,7 +40,7 @@ export default function Achievement() {
   useEffect(() => {
     // 1. Fetch Credly Badges
     if (achievementSection.autoFetchCredly) {
-      fetch("/credly_badges.json")
+      fetch("./credly_badges.json")
         .then(res => {
           if (res.ok) {
             return res.json();
@@ -91,7 +91,7 @@ export default function Achievement() {
 
     // 2. Fetch Microsoft Learn Live Data
     if (achievementSection.autoFetchMsLearn) {
-      fetch("/mslearn_data.json")
+      fetch("./mslearn_data.json")
         .then(res => {
           if (res.ok) return res.json();
           throw new Error("Unable to fetch mslearn_data.json");
