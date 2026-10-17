@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
+    "fetch-data": "node fetch.js",
+    "prebuild": "node fetch.js",
     "build": "vite build",
     "preview": "vite preview"
   },

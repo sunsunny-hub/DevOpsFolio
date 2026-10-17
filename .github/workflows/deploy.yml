@@ -5,6 +5,8 @@ env:
   REACT_APP_GITHUB_TOKEN: ${{ secrets.REACT_APP_GITHUB_TOKEN }} # This is automatically set by Github Actions
   USE_GITHUB_DATA: "true"
   MEDIUM_USERNAME: "surajsingh5233" # Change this to your medium username
+  CREDLY_USERNAME: "suraj-singh-thakur.ffce67ef" # Credly profile username for automatic certification sync
+  MS_LEARN_USERNAME: "surajsingh-5992" # Microsoft Learn username for automatic achievement sync
 on:
   workflow_dispatch:
   push:
@@ -38,4 +40,4 @@ jobs:
         with:
           GITHUB_TOKEN : ${{ secrets.REACT_APP_GITHUB_TOKEN }} # This is provided by GitHub.
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build # The folder the action should deploy.
+          FOLDER: dist # The folder the action should deploy.

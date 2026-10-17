@@ -1,0 +1,409 @@
+.ms-learn-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto;
+  font-family: inherit;
+
+  .ms-learn-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+  }
+
+  .ms-learn-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    .ms-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .ms-logo-icon {
+        flex-shrink: 0;
+      }
+
+      .ms-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1a202c;
+        margin: 0;
+      }
+
+      .ms-subtitle {
+        font-size: 0.85rem;
+        color: #718096;
+        margin: 2px 0 0 0;
+      }
+    }
+
+    .ms-profile-link-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #0078d4;
+      background: #ebf3fc;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+
+      &:hover {
+        background: #0078d4;
+        color: #ffffff;
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  .ms-profile-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+
+    .ms-user-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .ms-user-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #0078d4;
+      }
+
+      .ms-user-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin: 0 0 4px 0;
+      }
+
+      .ms-level-badge {
+        display: inline-block;
+        background: #107c41;
+        color: #ffffff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 12px;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .ms-stats-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      .ms-stat-pill {
+        background: #f7fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 8px 16px;
+        text-align: center;
+        min-width: 90px;
+
+        .ms-stat-number {
+          display: block;
+          font-size: 1.35rem;
+          font-weight: 800;
+          color: #0078d4;
+          line-height: 1.2;
+        }
+
+        .ms-stat-label {
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: #718096;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+  }
+
+  .ms-xp-container {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 12px 16px;
+    border: 1px solid #edf2f7;
+
+    .ms-xp-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #4a5568;
+      margin-bottom: 8px;
+
+      strong {
+        color: #0078d4;
+      }
+    }
+
+    .ms-progress-bar-bg {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+
+      .ms-progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #0078d4, #107c41);
+        border-radius: 4px;
+        transition: width 0.5s ease;
+      }
+    }
+  }
+
+  /* Learning Paths Section */
+  .ms-paths-section {
+    margin-top: 24px;
+
+    .ms-paths-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .ms-paths-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin: 0;
+      }
+
+      .ms-paths-caption {
+        font-size: 0.8rem;
+        color: #a0aec0;
+      }
+    }
+
+    .ms-paths-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .ms-path-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 120, 212, 0.12);
+        border-color: #0078d4;
+      }
+
+      .ms-path-img-wrapper {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .ms-path-trophy-img {
+          width: 36px;
+          height: 36px;
+          object-fit: contain;
+        }
+      }
+
+      .ms-path-content {
+        flex: 1;
+
+        .ms-path-tag {
+          font-size: 0.65rem;
+          font-weight: 800;
+          color: #d97706;
+          background: #fef3c7;
+          padding: 2px 6px;
+          border-radius: 4px;
+          display: inline-block;
+          margin-bottom: 4px;
+        }
+
+        .ms-path-card-title {
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #1a202c;
+          margin: 0 0 4px 0;
+          line-height: 1.35;
+        }
+
+        .ms-path-date {
+          display: block;
+          font-size: 0.75rem;
+          color: #718096;
+        }
+      }
+    }
+
+    .ms-view-more-container {
+      text-align: center;
+      margin-top: 16px;
+
+      .ms-view-more-btn {
+        background: transparent;
+        color: #0078d4;
+        border: 1px solid #0078d4;
+        padding: 8px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: #0078d4;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  /* Dark Mode Styles */
+  &.dark-mode {
+    .ms-learn-card {
+      background: #171c28;
+      border-color: #2d3748;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .ms-learn-header {
+      border-bottom-color: #2d3748;
+
+      .ms-brand {
+        .ms-title {
+          color: #f7fafc;
+        }
+        .ms-subtitle {
+          color: #a0aec0;
+        }
+      }
+
+      .ms-profile-link-btn {
+        background: #1e3a5f;
+        color: #63b3ed;
+
+        &:hover {
+          background: #3182ce;
+          color: #ffffff;
+        }
+      }
+    }
+
+    .ms-profile-info-row {
+      .ms-user-profile {
+        .ms-user-name {
+          color: #e2e8f0;
+        }
+      }
+
+      .ms-stats-grid {
+        .ms-stat-pill {
+          background: #1a202c;
+          border-color: #2d3748;
+
+          .ms-stat-number {
+            color: #63b3ed;
+          }
+
+          .ms-stat-label {
+            color: #a0aec0;
+          }
+        }
+      }
+    }
+
+    .ms-xp-container {
+      background: #1a202c;
+      border-color: #2d3748;
+
+      .ms-xp-labels {
+        color: #cbd5e0;
+
+        strong {
+          color: #63b3ed;
+        }
+      }
+
+      .ms-progress-bar-bg {
+        background: #2d3748;
+      }
+    }
+
+    .ms-paths-section {
+      .ms-paths-header {
+        .ms-paths-title {
+          color: #e2e8f0;
+        }
+        .ms-paths-caption {
+          color: #718096;
+        }
+      }
+
+      .ms-path-card {
+        background: #1a202c;
+        border-color: #2d3748;
+
+        &:hover {
+          border-color: #63b3ed;
+          box-shadow: 0 8px 20px rgba(99, 179, 237, 0.15);
+        }
+
+        .ms-path-content {
+          .ms-path-tag {
+            background: #78350f;
+            color: #fde68a;
+          }
+
+          .ms-path-card-title {
+            color: #f7fafc;
+          }
+
+          .ms-path-date {
+            color: #a0aec0;
+          }
+        }
+      }
+
+      .ms-view-more-container {
+        .ms-view-more-btn {
+          color: #63b3ed;
+          border-color: #63b3ed;
+
+          &:hover {
+            background: #63b3ed;
+            color: #1a202c;
+          }
+        }
+      }
+    }
+  }
+}

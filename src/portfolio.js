@@ -319,6 +319,10 @@ const achievementSection = {
   title: emoji("Achievements And Certifications 🏆 "),
   subtitle:
     "Achievements, Certifications and Some Cool Stuff that I have done !",
+  autoFetchCredly: true, // Set to true to automatically sync public badges from Credly
+  credlyUsername: "suraj-singh-thakur.ffce67ef", // Your Credly profile handle
+  autoFetchMsLearn: true, // Set to true to automatically sync Microsoft Learn achievements
+  msLearnUsername: "surajsingh-5992", // Your Microsoft Learn username
 
   achievementsCards: [
     {
@@ -331,15 +335,7 @@ const achievementSection = {
         {
           name: "Certification",
           url: "https://www.credly.com/badges/78a1103c-ecf2-4a6c-9932-565bf2b6591e/public_url"
-        },
-//        {
-//          name: "Award Letter",
-//          url: "https://drive.google.com/file/d/0B7kazrtMwm5dekxBTW5hQkg2WXUyR3QzQmR0VERiLXlGRVdF/view?usp=sharing"
-//        },
-//        {
-//          name: "Google Code-in Blog",
-//          url: "https://opensource.googleblog.com/2019/01/google-code-in-2018-winners.html"
-//        }
+        }
       ]
     },
     {
@@ -364,8 +360,8 @@ const achievementSection = {
       footerLink: [
         {
           name: "Certification", 
-          url: "https://www.credly.com/earner/earned/badge/53d13878-236f-4242-af6d-ac20752cdc84"
-        },
+          url: "https://www.credly.com/badges/53d13878-236f-4242-af6d-ac20752cdc84/public_url"
+        }
       ]
     },
     {
@@ -377,7 +373,7 @@ const achievementSection = {
         {
           name: "Certification", 
           url: "https://learn.microsoft.com/api/credentials/share/en-us/surajsingh-5992/5A930C5769F8C404?sharingId=442D4838F487B16A"
-        },
+        }
       ]
     }
   ],
