@@ -1,0 +1,36 @@
+[
+  {
+    "title": "Shift-Left Infrastructure Compliance Automation",
+    "url": "https://blogs.perficient.com/shift-left-infrastructure-compliance-automation/",
+    "date": "July 2026",
+    "rawDate": "Thu, 30 Jul 2026 15:15:42 +0000",
+    "publisher": "Perficient Tech Blog",
+    "description": "Using n8n, Azure DevOps, FastAPI, RAG, and AI to audit Terraform changes before merge Infrastructure teams are increasingly using Infrastructure-as-Code to define, review, and deploy...",
+    "tags": [
+      "Terraform",
+      "DevSecOps",
+      "Azure",
+      "GenAI",
+      "Compliance"
+    ],
+    "coverImage": "https://blogs.perficient.com/wp-content/uploads/2026/07/iStock-2217031205-1024x683.jpg",
+    "isAutomated": true
+  },
+  {
+    "title": "Azure IoT Operations: Empowering the Future of Connectivity and Automation",
+    "url": "https://blogs.perficient.com/azure-iot-operations-empowering-the-future-of-connectivity-and-automation/",
+    "date": "May 2025",
+    "rawDate": "Wed, 28 May 2025 03:24:11 +0000",
+    "publisher": "Perficient Tech Blog",
+    "description": "In today’s world, the Internet of Things (IoT) is revolutionizing industries across the globe by connecting devices, systems, and people in ways that were once...",
+    "tags": [
+      "Azure",
+      "AzureIOT",
+      "AzureIoTOperation",
+      "IoT",
+      "Microsoft"
+    ],
+    "coverImage": "https://blogs.perficient.com/wp-content/uploads/2025/05/IoT-Kitchen.jpg",
+    "isAutomated": true
+  }
+]
