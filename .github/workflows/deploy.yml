@@ -2,7 +2,7 @@ name: Build and Deploy
 env:
   CI: false
   GITHUB_USERNAME: ${{ github.repository_owner }}
-  REACT_APP_GITHUB_TOKEN: ${{ secrets.REACT_APP_GITHUB_TOKEN }} # This is automatically set by Github Actions
+  REACT_APP_GITHUB_TOKEN: ${{ secrets.REACT_APP_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
   USE_GITHUB_DATA: "true"
   MEDIUM_USERNAME: "surajsingh5233" # Change this to your medium username
   CREDLY_USERNAME: "suraj-singh-thakur.ffce67ef" # Credly profile username for automatic certification sync
@@ -14,14 +14,15 @@ on:
       - master
   schedule:
     - cron: "0 12 * * 1" # see https://docs.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
-        with:
-          persist-credentials: false
 
       - name: Setup Node.js 🔧
         uses: actions/setup-node@v4
@@ -33,9 +34,10 @@ jobs:
         run: |
           npm install
           npm run build
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN : ${{ secrets.REACT_APP_GITHUB_TOKEN }} # This is provided by GitHub.
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: dist
