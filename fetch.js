@@ -41,6 +41,8 @@ const CREDLY_USERNAME =
   process.env.CREDLY_USERNAME || "suraj-singh-thakur.ffce67ef";
 const MS_LEARN_USERNAME =
   process.env.MS_LEARN_USERNAME || "surajsingh-5992";
+const PERFICIENT_AUTHOR =
+  process.env.PERFICIENT_AUTHOR || "surajthakur";
 
 async function fetchCredly() {
   if (!CREDLY_USERNAME) return;
@@ -267,10 +269,133 @@ async function fetchMedium() {
   }
 }
 
+async function fetchPerficientBlogs() {
+  if (!PERFICIENT_AUTHOR) return;
+  console.log(`Fetching Perficient blogs for author: ${PERFICIENT_AUTHOR}...`);
+  try {
+    const res = await fetch(
+      `https://blogs.perficient.com/author/${PERFICIENT_AUTHOR}/feed/`,
+      {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+          Accept: "application/rss+xml, application/xml, text/xml, */*"
+        },
+        signal: AbortSignal.timeout(10000)
+      }
+    );
+    if (!res.ok) {
+      console.warn(`Perficient blog feed returned status ${res.status}.`);
+      return;
+    }
+    const xml = await res.text();
+    const items = xml.split("<item>").slice(1);
+    const articles = [];
+
+    for (const raw of items) {
+      const item = raw.split("</item>")[0];
+
+      // Title
+      const titleMatch = item.match(/<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/s);
+      const title = titleMatch ? titleMatch[1].trim() : "";
+      if (!title) continue;
+
+      // Link
+      const linkMatch = item.match(/<link>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/link>/s);
+      const link = linkMatch ? linkMatch[1].trim() : "";
+
+      // PubDate
+      const pubDateMatch = item.match(/<pubDate>(.*?)<\/pubDate>/s);
+      let pubDateStr = "";
+      let formattedDate = "";
+      if (pubDateMatch) {
+        pubDateStr = pubDateMatch[1].trim();
+        const d = new Date(pubDateStr);
+        if (!isNaN(d.getTime())) {
+          formattedDate = d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+        }
+      }
+
+      // Media / Cover Image
+      const mediaMatch =
+        item.match(/<media:content[^>]+url=["']([^"']+)["']/i) ||
+        item.match(/<enclosure[^>]+url=["']([^"']+)["']/i) ||
+        item.match(/<img[^>]+src=["']([^"']+)["']/i);
+      const coverImage = mediaMatch ? mediaMatch[1] : null;
+
+      // Description
+      const descMatch = item.match(/<description>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/description>/);
+      let description = "";
+      if (descMatch) {
+        description = descMatch[1]
+          .replace(/<[^>]+>/g, "")
+          .replace(/The post .* appeared first on .*/i, "")
+          .replace(/&nbsp;/g, " ")
+          .replace(/&amp;/g, "&")
+          .replace(/&quot;/g, '"')
+          .replace(/&#8217;/g, "'")
+          .replace(/&#8216;/g, "'")
+          .replace(/&#8220;/g, '"')
+          .replace(/&#8221;/g, '"')
+          .replace(/&#8211;/g, "–")
+          .replace(/&#8212;/g, "—")
+          .replace(/&#8230;/g, "...")
+          .replace(/…/g, "...")
+          .replace(/\[\.\.\.\]/g, "...")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      // Categories
+      const categories = [];
+      const catMatches = item.matchAll(/<category>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/category>/g);
+      for (const match of catMatches) {
+        const cat = match[1].trim();
+        if (cat && !categories.includes(cat) && cat.toLowerCase() !== "uncategorized") {
+          categories.push(cat);
+        }
+      }
+
+      let tags = categories.filter(c => c.toLowerCase() !== "technical expertise");
+      if (tags.length === 0) {
+        if (/terraform/i.test(title + description)) tags.push("Terraform");
+        if (/devops|devsecops/i.test(title + description)) tags.push("DevSecOps");
+        if (/azure/i.test(title + description)) tags.push("Azure");
+        if (/iot/i.test(title + description)) tags.push("IoT");
+        if (/ai|rag|claude/i.test(title + description)) tags.push("GenAI");
+        if (/compliance|audit/i.test(title + description)) tags.push("Compliance");
+      }
+
+      articles.push({
+        title,
+        url: link,
+        date: formattedDate || pubDateStr,
+        rawDate: pubDateStr,
+        publisher: "Perficient Tech Blog",
+        description,
+        tags: tags.length > 0 ? tags : ["DevOps", "Cloud"],
+        coverImage: coverImage || null,
+        isAutomated: true
+      });
+    }
+
+    fs.writeFileSync(
+      "./public/perficient_blogs.json",
+      JSON.stringify(articles, null, 2)
+    );
+    console.log(
+      `Saved ${articles.length} Perficient blog post(s) to public/perficient_blogs.json`
+    );
+  } catch (err) {
+    console.warn("Could not fetch Perficient blogs:", err.message);
+  }
+}
+
 async function main() {
   await Promise.allSettled([
     fetchCredly(),
     fetchMicrosoftLearn(),
+    fetchPerficientBlogs(),
     fetchGitHub(),
     fetchMedium()
   ]);

@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { portfolioData } from '../data/portfolioData';
-import { GitBranch, Shield, Layers, Server, Activity, CheckCircle2, ChevronRight, Terminal } from 'lucide-react';
+import { GitBranch, Shield, Layers, Server, Activity, CheckCircle2, ChevronRight, Terminal, Play, Pause, RefreshCw, Cpu, Check } from 'lucide-react';
 
 export default function PipelineShowcase() {
   const [activeStep, setActiveStep] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const autoPlayRef = useRef(null);
 
   const stageSnippets = [
     {
       title: "GitHub Actions / Azure DevOps Webhook Trigger",
+      stageTag: "COMMIT & PR GATE",
+      runnerTime: "0.14s",
       snippet: `name: "DevSecOps Multi-Cloud Delivery"
 on:
   push:
@@ -26,6 +30,8 @@ concurrency:
     },
     {
       title: "DevSecOps Vulnerability Gating & SAST",
+      stageTag: "VULNERABILITY SCAN",
+      runnerTime: "0.48s",
       snippet: `- name: Run Trivy Vulnerability Scanner
   uses: aquasecurity/trivy-action@master
   with:
@@ -43,6 +49,8 @@ concurrency:
     },
     {
       title: "Multi-Stage Docker Build & Secure Image Signing",
+      stageTag: "CONTAINER BUILD",
+      runnerTime: "0.52s",
       snippet: `FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
@@ -62,6 +70,8 @@ HEALTHCHECK --interval=30s CMD curl -f http://localhost/ || exit 1`,
     },
     {
       title: "Terraform IaC Plan & Apply with State Locking",
+      stageTag: "IAC PROVISIONING",
+      runnerTime: "0.65s",
       snippet: `terraform {
   backend "s3" {
     bucket         = "suraj-tfstate-prod"
@@ -84,6 +94,8 @@ module "enterprise_vpc" {
     },
     {
       title: "Zero-Downtime Multi-Cloud Deployment",
+      stageTag: "K8S ROLLOUT",
+      runnerTime: "0.38s",
       snippet: `apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -108,6 +120,8 @@ spec:
     },
     {
       title: "Prometheus & Grafana Observability Telemetry",
+      stageTag: "LIVE OBSERVABILITY",
+      runnerTime: "0.22s",
       snippet: `scrape_configs:
   - job_name: 'kubernetes-pods'
     kubernetes_sd_configs:
@@ -124,6 +138,24 @@ spec:
     }
   ];
 
+  // Auto-play / Cycle through pipeline stages
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    autoPlayRef.current = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % portfolioData.pipelineSteps.length);
+    }, 4200);
+
+    return () => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    };
+  }, [isPlaying]);
+
+  const handleStepClick = (index) => {
+    setActiveStep(index);
+    setIsPlaying(false); // Pause on manual inspection
+  };
+
   const currentStage = portfolioData.pipelineSteps[activeStep];
   const currentSnippet = stageSnippets[activeStep];
 
@@ -131,7 +163,7 @@ spec:
     <section id="pipeline" style={{ padding: '80px 0', position: 'relative' }}>
       <div className="container-max">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '45px' }}>
           <div
             style={{
               display: 'inline-flex',
@@ -155,58 +187,126 @@ spec:
           <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 800, marginBottom: '14px' }}>
             Production <span className="text-gradient-cyan">Delivery Lifecycle</span>
           </h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '650px', margin: '0 auto', fontSize: '1rem' }}>
-            Interactive blueprint of how code travels from commit to hardened multi-cloud deployment with automated DevSecOps gates, Terraform IaC, and real-time observability.
+          <p style={{ color: 'var(--text-muted)', maxWidth: '660px', margin: '0 auto 20px', fontSize: '1rem', lineHeight: 1.6 }}>
+            Interactive blueprint of how infrastructure code travels from commit to hardened multi-cloud deployment with automated DevSecOps gates, Terraform IaC, and real-time observability.
           </p>
+
+          {/* Flow Control Pill */}
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '12px',
+              padding: '6px 16px',
+              borderRadius: '9999px',
+              background: 'rgba(15, 23, 42, 0.75)',
+              border: '1px solid rgba(56, 189, 248, 0.2)',
+              fontSize: '0.8rem',
+              fontFamily: 'var(--font-mono)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span className="pulse-green"></span>
+              <span style={{ color: '#4ade80', fontWeight: 600 }}>LIVE PIPELINE STREAM</span>
+            </div>
+            <span style={{ color: 'rgba(255, 255, 255, 0.2)' }}>|</span>
+            <button
+              onClick={() => setIsPlaying(!isPlaying)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: isPlaying ? '#38bdf8' : '#94a3b8',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                cursor: 'pointer',
+                fontSize: '0.78rem',
+                fontFamily: 'var(--font-mono)',
+              }}
+            >
+              {isPlaying ? <Pause size={12} /> : <Play size={12} />}
+              <span>{isPlaying ? 'Auto-Cycle: Active' : 'Auto-Cycle: Paused'}</span>
+            </button>
+          </div>
         </div>
 
-        {/* Pipeline Steps Flow Bar */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-            gap: '12px',
-            marginBottom: '30px',
-          }}
-        >
-          {portfolioData.pipelineSteps.map((step, idx) => {
-            const isSelected = idx === activeStep;
-            return (
-              <button
-                key={step.step}
-                onClick={() => setActiveStep(idx)}
-                className="glass-panel"
-                style={{
-                  padding: '16px 14px',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  borderColor: isSelected ? '#06b6d4' : 'rgba(255, 255, 255, 0.08)',
-                  background: isSelected ? 'rgba(6, 182, 212, 0.12)' : 'rgba(13, 19, 34, 0.6)',
-                  boxShadow: isSelected ? '0 0 20px rgba(6, 182, 212, 0.25)' : 'none',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.72rem',
-                      color: isSelected ? '#38bdf8' : '#64748b',
-                      fontWeight: 700,
-                    }}
-                  >
-                    STAGE {step.step}
-                  </span>
-                  {isSelected && <span className="pulse-green"></span>}
-                </div>
-                <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>
-                  {step.name}
-                </div>
-                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-                  {step.tool.split('•')[0]}
-                </div>
-              </button>
-            );
-          })}
+        {/* Continuous Glowing Pipeline Conduit Bar */}
+        <div style={{ position: 'relative', marginBottom: '28px' }}>
+          {/* Animated Neon Light Beam */}
+          <div className="pipeline-conduit-track">
+            <div
+              className="pipeline-conduit-pulse"
+              style={{
+                left: `${(activeStep / (portfolioData.pipelineSteps.length - 1)) * 96}%`,
+              }}
+            />
+          </div>
+
+          {/* Pipeline Steps Grid */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+              gap: '12px',
+              position: 'relative',
+              zIndex: 2,
+            }}
+          >
+            {portfolioData.pipelineSteps.map((step, idx) => {
+              const isSelected = idx === activeStep;
+              const isPassed = idx < activeStep;
+              return (
+                <button
+                  key={step.step}
+                  onClick={() => handleStepClick(idx)}
+                  className={`glass-panel pipeline-step-card ${isSelected ? 'step-active' : ''}`}
+                  style={{
+                    padding: '16px 14px',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    borderRadius: '12px',
+                    borderColor: isSelected ? '#06b6d4' : isPassed ? 'rgba(16, 185, 129, 0.3)' : 'rgba(255, 255, 255, 0.08)',
+                    background: isSelected
+                      ? 'linear-gradient(135deg, rgba(6, 182, 212, 0.18) 0%, rgba(15, 23, 42, 0.9) 100%)'
+                      : 'rgba(13, 19, 34, 0.7)',
+                    boxShadow: isSelected ? '0 0 25px rgba(6, 182, 212, 0.3), inset 0 0 15px rgba(6, 182, 212, 0.1)' : 'none',
+                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {/* Top Progress Beam for Active Step */}
+                  {isSelected && <div className="step-active-indicator" />}
+
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.72rem',
+                        color: isSelected ? '#38bdf8' : isPassed ? '#10b981' : '#64748b',
+                        fontWeight: 700,
+                      }}
+                    >
+                      STAGE {step.step}
+                    </span>
+                    {isSelected ? (
+                      <span className="pulse-cyan"></span>
+                    ) : isPassed ? (
+                      <Check size={13} color="#10b981" />
+                    ) : (
+                      <span style={{ fontSize: '0.65rem', color: '#475569', fontFamily: 'var(--font-mono)' }}>WAIT</span>
+                    )}
+                  </div>
+                  <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>
+                    {step.name}
+                  </div>
+                  <div style={{ fontSize: '0.74rem', color: isSelected ? '#67e8f9' : 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                    {step.tool.split('•')[0]}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Detailed Stage Deep Dive Card */}
@@ -216,6 +316,8 @@ spec:
             padding: '32px',
             background: '#090e1a',
             border: '1px solid rgba(56, 189, 248, 0.3)',
+            borderRadius: '16px',
+            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(6, 182, 212, 0.1)',
           }}
         >
           <div
@@ -226,21 +328,22 @@ spec:
               alignItems: 'center',
             }}
           >
-            {/* Left Info */}
+            {/* Left Info Column */}
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
                 <span
                   style={{
                     background: 'rgba(6, 182, 212, 0.2)',
                     color: '#22d3ee',
-                    padding: '2px 8px',
-                    borderRadius: '4px',
+                    border: '1px solid rgba(6, 182, 212, 0.35)',
+                    padding: '2px 10px',
+                    borderRadius: '9999px',
                     fontSize: '0.75rem',
                     fontFamily: 'var(--font-mono)',
                     fontWeight: 700,
                   }}
                 >
-                  STAGE {currentStage.step}
+                  STAGE {currentStage.step} • {currentSnippet.stageTag}
                 </span>
                 <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>{currentStage.tool}</span>
               </div>
@@ -257,7 +360,7 @@ spec:
                 <div style={{ fontSize: '0.82rem', fontFamily: 'var(--font-mono)', color: '#38bdf8', marginBottom: '10px', textTransform: 'uppercase' }}>
                   Engineering Safeguards & Standards:
                 </div>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {currentSnippet.highlights.map((item, hIdx) => (
                     <li key={hIdx} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.88rem', color: '#cbd5e1' }}>
                       <CheckCircle2 size={16} color="#10b981" />
@@ -268,17 +371,32 @@ spec:
               </div>
             </div>
 
-            {/* Right: Code / YAML Spec Preview */}
-            <div className="terminal-window">
-              <div className="terminal-header">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            {/* Right: Code / YAML Spec Preview with Runner Telemetry */}
+            <div className="terminal-window" style={{ border: '1px solid rgba(56, 189, 248, 0.3)' }}>
+              <div className="terminal-header" style={{ background: '#0a1020' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Terminal size={14} color="#06b6d4" />
                   <span style={{ fontSize: '0.76rem', color: '#cbd5e1' }}>{currentSnippet.title}</span>
                 </div>
-                <span style={{ fontSize: '0.68rem', color: '#64748b' }}>SPEC FILE</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span
+                    style={{
+                      fontSize: '0.66rem',
+                      fontFamily: 'var(--font-mono)',
+                      background: 'rgba(16, 185, 129, 0.15)',
+                      border: '1px solid rgba(16, 185, 129, 0.3)',
+                      color: '#4ade80',
+                      padding: '1px 6px',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    RUN: {currentSnippet.runnerTime}
+                  </span>
+                  <span style={{ fontSize: '0.68rem', color: '#64748b' }}>SPEC</span>
+                </div>
               </div>
-              <div style={{ padding: '16px', background: '#070b14', overflowX: 'auto' }}>
-                <pre style={{ margin: 0, fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: '#38bdf8', lineHeight: 1.5 }}>
+              <div style={{ padding: '18px', background: '#050811', overflowX: 'auto', position: 'relative' }}>
+                <pre style={{ margin: 0, fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: '#38bdf8', lineHeight: 1.55 }}>
                   {currentSnippet.snippet}
                 </pre>
               </div>
@@ -286,6 +404,73 @@ spec:
           </div>
         </div>
       </div>
+
+      <style>{`
+        /* Pipeline Conduit Track */
+        .pipeline-conduit-track {
+          position: absolute;
+          top: 50%;
+          left: 20px;
+          right: 20px;
+          height: 3px;
+          background: rgba(255, 255, 255, 0.06);
+          border-radius: 9999px;
+          transform: translateY(-50%);
+          z-index: 1;
+        }
+
+        .pipeline-conduit-pulse {
+          position: absolute;
+          top: -3px;
+          width: 30px;
+          height: 9px;
+          background: radial-gradient(circle, #38bdf8 0%, #06b6d4 50%, transparent 100%);
+          box-shadow: 0 0 14px #38bdf8, 0 0 25px #06b6d4;
+          border-radius: 9999px;
+          transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .pipeline-step-card:hover {
+          transform: translateY(-3px);
+          border-color: rgba(56, 189, 248, 0.4) !important;
+        }
+
+        .step-active {
+          transform: translateY(-2px);
+        }
+
+        .step-active-indicator {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, #06b6d4, #38bdf8, #2dd4bf);
+          box-shadow: 0 0 10px #06b6d4;
+          animation: glowTrack 2s linear infinite;
+        }
+
+        @keyframes glowTrack {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.6; }
+        }
+
+        .pulse-cyan {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: #22d3ee;
+          box-shadow: 0 0 10px #22d3ee;
+          animation: pulseCyanRing 1.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+
+        @keyframes pulseCyanRing {
+          0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7); }
+          70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 211, 238, 0); }
+          100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+        }
+      `}</style>
     </section>
   );
 }

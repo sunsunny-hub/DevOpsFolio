@@ -1,6 +1,7 @@
 import React from 'react';
 import { portfolioData } from '../data/portfolioData';
 import { Building2, Calendar, MapPin, CheckCircle2, GraduationCap } from 'lucide-react';
+import { resolveAssetUrl } from '../utils';
 
 export default function ExperienceTimeline() {
   return (
@@ -74,7 +75,7 @@ export default function ExperienceTimeline() {
                     }}
                   >
                     <img
-                      src={exp.logo}
+                      src={resolveAssetUrl(exp.logo)}
                       alt={exp.company}
                       style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                       onError={(e) => {

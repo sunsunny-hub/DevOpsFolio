@@ -7,6 +7,7 @@ env:
   MEDIUM_USERNAME: "surajsingh5233" # Change this to your medium username
   CREDLY_USERNAME: "suraj-singh-thakur.ffce67ef" # Credly profile username for automatic certification sync
   MS_LEARN_USERNAME: "surajsingh-5992" # Microsoft Learn username for automatic achievement sync
+  PERFICIENT_AUTHOR: "surajthakur" # Perficient blog author slug for automatic article sync
 on:
   workflow_dispatch:
   push:

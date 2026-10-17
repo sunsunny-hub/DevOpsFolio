@@ -1,6 +1,7 @@
 import React from 'react';
 import { portfolioData } from '../data/portfolioData';
 import { Briefcase, ExternalLink, ShieldCheck, ArrowUpRight, Sparkles } from 'lucide-react';
+import { resolveAssetUrl } from '../utils';
 
 export default function ProjectsCaseStudies() {
   return (
@@ -72,7 +73,7 @@ export default function ProjectsCaseStudies() {
                     }}
                   >
                     <img
-                      src={project.logo}
+                      src={resolveAssetUrl(project.logo)}
                       alt={project.client}
                       style={{ maxHeight: '28px', maxWidth: '100%', objectFit: 'contain' }}
                       onError={(e) => {

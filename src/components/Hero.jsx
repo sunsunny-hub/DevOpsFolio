@@ -1,16 +1,152 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { portfolioData } from '../data/portfolioData';
-import { Terminal, Shield, Cloud, Server, ExternalLink, ArrowRight, Play, CheckCircle, Code, Copy, Check } from 'lucide-react';
+import { Terminal, Shield, Cloud, Server, ExternalLink, ArrowRight, Play, Pause, CheckCircle, Code, Copy, Check, Sparkles } from 'lucide-react';
+
+const TAGLINE_ITEMS = [
+  'Triple-Cloud Certified (AWS • Azure • GCP)',
+  'Zero-Downtime CI/CD Pipeline Architect',
+  'Automated Terraform Infrastructure as Code',
+  'DevSecOps Compliance & Vulnerability Gating',
+  'Kubernetes & Cloud-Native Containerization',
+];
+
+const DEMO_COMMANDS = [
+  {
+    cmd: 'terraform plan -out=tfplan',
+    output: `Terraform Execution Plan:
+  # module.vpc.aws_vpc.prod will be created (10.0.0.0/16)
+  # module.k8s.aws_eks_cluster.core will be created (Kubernetes v1.30)
+  # module.security.waf_shield.rules will be configured
+Plan: 18 to add, 0 to change, 0 to destroy.
+State lock acquired in DynamoDB [ap-south-1]. Ready for apply.`,
+  },
+  {
+    cmd: 'trivy image --severity HIGH,CRITICAL suraj/cloud-api:latest',
+    output: `Scanning 184 OS & library dependencies...
+✓ OS Vulnerabilities: 0 Critical, 0 High
+✓ Secret Leak Detection: Clean (No tokens found)
+✓ DevSecOps Quality Gate: PASSED (Release Approved)`,
+  },
+  {
+    cmd: 'kubectl rollout status deployment/platform-api -n prod',
+    output: `Waiting for deployment "platform-api" rollout to finish: 1 of 5 updated replicas are available...
+Waiting for deployment "platform-api" rollout to finish: 3 of 5 updated replicas are available...
+✓ deployment "platform-api" successfully rolled out [5/5 replicas healthy]`,
+  },
+  {
+    cmd: 'curl -I https://iam-surajsinghthakur.netlify.app/health',
+    output: `HTTP/2 200 OK
+server: Netlify Serverless Edge
+x-cluster-status: 100% operational | 46 microservices active
+x-response-time: 14ms (Global CDN Edge Cache HIT)`,
+  },
+];
 
 export default function Hero({ onOpenResume }) {
+  // Terminal state
   const [terminalInput, setTerminalInput] = useState('');
   const [terminalHistory, setTerminalHistory] = useState([
     { type: 'system', text: 'Initializing cloud session for cluster suraj-prod-01...' },
     { type: 'system', text: 'Connected to AWS ap-south-1 | Azure West-US | GCP asia-south1' },
     { type: 'command', text: 'suraj --summary' },
-    { type: 'output', text: 'Suraj Singh Thakur: DevOps & Multi-Cloud Engineer @ Perficient Inc\nTriple-Cloud Certified: AWS • Azure • GCP | DevSecOps & Terraform Expert' },
+    {
+      type: 'output',
+      text: 'Suraj Singh Thakur: DevOps & Multi-Cloud Engineer @ Perficient Inc\nTriple-Cloud Certified: AWS • Azure • GCP | DevSecOps & Terraform Expert',
+    },
   ]);
+  const [isAutoTyping, setIsAutoTyping] = useState(true);
+  const [typingCommandText, setTypingCommandText] = useState('');
   const [copied, setCopied] = useState(false);
+
+  // Tagline typewriter state
+  const [taglineIndex, setTaglineIndex] = useState(0);
+  const [taglineText, setTaglineText] = useState('');
+  const [isDeletingTagline, setIsDeletingTagline] = useState(false);
+
+  const terminalBodyRef = useRef(null);
+  const autoTypeTimeoutRef = useRef(null);
+  const demoCommandIndexRef = useRef(0);
+
+  // Auto-scroll terminal on new history
+  useEffect(() => {
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
+  }, [terminalHistory, typingCommandText]);
+
+  // Tagline Typewriter Effect
+  useEffect(() => {
+    const currentFullText = TAGLINE_ITEMS[taglineIndex];
+    let speed = isDeletingTagline ? 35 : 75;
+
+    if (!isDeletingTagline && taglineText === currentFullText) {
+      speed = 2200; // Pause at full word
+    } else if (isDeletingTagline && taglineText === '') {
+      speed = 400; // Pause before typing next word
+    }
+
+    const timer = setTimeout(() => {
+      if (!isDeletingTagline && taglineText === currentFullText) {
+        setIsDeletingTagline(true);
+      } else if (isDeletingTagline && taglineText === '') {
+        setIsDeletingTagline(false);
+        setTaglineIndex((prev) => (prev + 1) % TAGLINE_ITEMS.length);
+      } else if (isDeletingTagline) {
+        setTaglineText(currentFullText.substring(0, taglineText.length - 1));
+      } else {
+        setTaglineText(currentFullText.substring(0, taglineText.length + 1));
+      }
+    }, speed);
+
+    return () => clearTimeout(timer);
+  }, [taglineText, isDeletingTagline, taglineIndex]);
+
+  // Terminal Auto-Typing Stream Loop
+  useEffect(() => {
+    if (!isAutoTyping) {
+      setTypingCommandText('');
+      return;
+    }
+
+    let charIndex = 0;
+    const currentDemo = DEMO_COMMANDS[demoCommandIndexRef.current % DEMO_COMMANDS.length];
+    const fullCmd = currentDemo.cmd;
+
+    // Step 1: Type the command character by character
+    const typeInterval = setInterval(() => {
+      if (charIndex <= fullCmd.length) {
+        setTypingCommandText(fullCmd.substring(0, charIndex));
+        charIndex++;
+      } else {
+        clearInterval(typeInterval);
+
+        // Step 2: Brief pause before executing
+        autoTypeTimeoutRef.current = setTimeout(() => {
+          setTerminalHistory((prev) => {
+            const nextHistory = [
+              ...prev.slice(-8), // Keep last 8 entries clean
+              { type: 'command', text: fullCmd },
+              { type: 'output', text: currentDemo.output },
+            ];
+            return nextHistory;
+          });
+          setTypingCommandText('');
+          demoCommandIndexRef.current++;
+
+          // Step 3: Wait 4.5 seconds before typing next demo command
+          autoTypeTimeoutRef.current = setTimeout(() => {
+            // Triggers next loop cycle via state update
+            setIsAutoTyping((curr) => curr);
+          }, 4500);
+        }, 600);
+      }
+    }, 65);
+
+    return () => {
+      clearInterval(typeInterval);
+      if (autoTypeTimeoutRef.current) clearTimeout(autoTypeTimeoutRef.current);
+    };
+  }, [isAutoTyping, demoCommandIndexRef.current]);
 
   const quickCommands = [
     'kubectl get certs',
@@ -22,6 +158,10 @@ export default function Hero({ onOpenResume }) {
   const handleCommandExecution = (cmd) => {
     const trimmed = cmd.trim();
     if (!trimmed) return;
+
+    // Pause auto-typing when user manually executes
+    setIsAutoTyping(false);
+    setTypingCommandText('');
 
     const lower = trimmed.toLowerCase();
     let response = '';
@@ -36,7 +176,14 @@ export default function Hero({ onOpenResume }) {
   • cat skills.json    - Display core technical proficiencies
   • history -clients   - Inspect enterprise client work (Qualcomm, RK Holdings, Leadiant)
   • status             - Check live Netlify & cloud cluster telemetry
+  • autotype on/off    - Toggle terminal command simulator
   • clear              - Reset terminal console`;
+    } else if (lower === 'autotype on') {
+      setIsAutoTyping(true);
+      response = 'Terminal automated command stream resumed.';
+    } else if (lower === 'autotype off') {
+      setIsAutoTyping(false);
+      response = 'Terminal automated command stream paused. Manual mode active.';
     } else if (lower.includes('cert') || lower.includes('kubectl')) {
       response = `GLOBAL CREDENTIALS VERIFIED [7 Active | MS Learn Level 13]:
   1. AWS Certified Solutions Architect (Associate) -> Credly Verified
@@ -70,7 +217,7 @@ export default function Hero({ onOpenResume }) {
   • DLBA: Public Sector Cloud Operations & Modernization
   • Waste Management: Secure Financial Cloud Data Pipelines`;
     } else if (lower.includes('status')) {
-      response = `Telemetry: All 46 Microservices Healthy | Latency: 18ms | Region: Global CDN Edge`;
+      response = `Telemetry: All 46 Microservices Healthy | Latency: 14ms | Region: Global CDN Edge`;
     } else {
       response = `Command executed: "${trimmed}". Type "help" to view interactive commands.`;
     }
@@ -156,7 +303,7 @@ export default function Hero({ onOpenResume }) {
               }}
             >
               <Cloud size={14} />
-              Triple-Cloud Certified Engineer
+              Triple-Cloud Certified Platform Engineer
             </div>
 
             <h1
@@ -164,24 +311,40 @@ export default function Hero({ onOpenResume }) {
                 fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
                 lineHeight: 1.15,
                 fontWeight: 800,
-                marginBottom: '18px',
+                marginBottom: '14px',
               }}
             >
               Hi, I'm <span className="text-gradient-cyan">{portfolioData.personal.name}</span>
             </h1>
 
-            <p
+            {/* Dynamic Typewriter Subheading */}
+            <div
               style={{
-                fontSize: '1.25rem',
-                fontWeight: 600,
-                color: '#cbd5e1',
-                marginBottom: '16px',
-                fontFamily: 'var(--font-heading)',
+                minHeight: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '14px',
               }}
             >
-              DevOps & Multi-Cloud Platform Engineer at{' '}
-              <span style={{ color: '#38bdf8' }}>Perficient Inc</span>
-            </p>
+              <p
+                style={{
+                  fontSize: 'clamp(1.05rem, 2.5vw, 1.25rem)',
+                  fontWeight: 600,
+                  color: '#e2e8f0',
+                  fontFamily: 'var(--font-heading)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: '6px',
+                }}
+              >
+                <span>Specializing in</span>
+                <span style={{ color: '#38bdf8', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                  {taglineText}
+                </span>
+                <span className="typewriter-cursor">|</span>
+              </p>
+            </div>
 
             <p
               style={{
@@ -192,9 +355,10 @@ export default function Hero({ onOpenResume }) {
                 lineHeight: 1.7,
               }}
             >
-              Specializing in architecting resilient multi-cloud infrastructure across{' '}
-              <strong style={{ color: '#fff' }}>AWS, Azure, and GCP</strong>, automated zero-downtime{' '}
-              <strong style={{ color: '#fff' }}>CI/CD pipelines</strong>, DevSecOps compliance, and{' '}
+              DevOps & Multi-Cloud Platform Engineer at{' '}
+              <strong style={{ color: '#38bdf8' }}>Perficient Inc</strong>. Architecting resilient multi-cloud infrastructure across{' '}
+              <strong style={{ color: '#fff' }}>AWS, Azure, and GCP</strong> with automated zero-downtime{' '}
+              <strong style={{ color: '#fff' }}>CI/CD pipelines</strong>, DevSecOps compliance gating, and{' '}
               <strong style={{ color: '#fff' }}>Terraform IaC</strong>.
             </p>
 
@@ -244,7 +408,7 @@ export default function Hero({ onOpenResume }) {
             </div>
           </div>
 
-          {/* Right Column: Interactive CLI Emulator */}
+          {/* Right Column: Interactive CLI Emulator with Live Typewriter */}
           <div>
             <div className="terminal-window">
               <div className="terminal-header">
@@ -256,12 +420,39 @@ export default function Hero({ onOpenResume }) {
                     suraj@cloud-control-plane:~ (bash)
                   </span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ fontSize: '0.7rem', color: '#06b6d4' }}>LIVE CLI</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <button
+                    onClick={() => setIsAutoTyping(!isAutoTyping)}
+                    style={{
+                      background: isAutoTyping ? 'rgba(6, 182, 212, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+                      border: `1px solid ${isAutoTyping ? 'rgba(6, 182, 212, 0.35)' : 'rgba(255, 255, 255, 0.1)'}`,
+                      color: isAutoTyping ? '#22d3ee' : '#94a3b8',
+                      borderRadius: '4px',
+                      padding: '2px 8px',
+                      fontSize: '0.68rem',
+                      fontFamily: 'var(--font-mono)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                    }}
+                    title={isAutoTyping ? 'Click to pause auto-typing demo' : 'Click to resume auto-typing demo'}
+                  >
+                    {isAutoTyping ? <Pause size={10} /> : <Play size={10} />}
+                    <span>{isAutoTyping ? 'STREAM: ON' : 'STREAM: PAUSED'}</span>
+                  </button>
                 </div>
               </div>
 
-              <div className="terminal-body">
+              <div
+                className="terminal-body"
+                ref={terminalBodyRef}
+                style={{
+                  maxHeight: '340px',
+                  overflowY: 'auto',
+                }}
+              >
                 {terminalHistory.map((item, index) => (
                   <div key={index} style={{ marginBottom: '8px' }}>
                     {item.type === 'system' && (
@@ -284,6 +475,7 @@ export default function Hero({ onOpenResume }) {
                           fontFamily: 'inherit',
                           fontSize: '0.82rem',
                           margin: '4px 0 0 16px',
+                          lineHeight: 1.5,
                         }}
                       >
                         {item.text}
@@ -292,15 +484,26 @@ export default function Hero({ onOpenResume }) {
                   </div>
                 ))}
 
-                {/* Input Prompt */}
+                {/* Active Automated Typewriter Line */}
+                {isAutoTyping && typingCommandText && (
+                  <div style={{ color: '#38bdf8', display: 'flex', gap: '6px', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ color: '#10b981' }}>➜</span>
+                    <span style={{ color: '#06b6d4' }}>~</span>
+                    <span style={{ color: '#67e8f9' }}>{typingCommandText}</span>
+                    <span className="terminal-block-cursor">▋</span>
+                  </div>
+                )}
+
+                {/* Interactive Input Prompt */}
                 <form onSubmit={onSubmitForm} style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '12px' }}>
                   <span style={{ color: '#10b981' }}>➜</span>
                   <span style={{ color: '#06b6d4' }}>~</span>
                   <input
                     type="text"
                     value={terminalInput}
+                    onFocus={() => setIsAutoTyping(false)}
                     onChange={(e) => setTerminalInput(e.target.value)}
-                    placeholder="Type 'help', 'kubectl get certs', or 'clear'..."
+                    placeholder={isAutoTyping ? "Click to type your own command (e.g. 'help')..." : "Type 'help', 'kubectl get certs', or 'clear'..."}
                     style={{
                       flex: 1,
                       background: 'transparent',
@@ -409,6 +612,26 @@ export default function Hero({ onOpenResume }) {
           ))}
         </div>
       </div>
+
+      <style>{`
+        @keyframes cursorBlink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        .typewriter-cursor {
+          display: inline-block;
+          color: #06b6d4;
+          font-weight: 700;
+          animation: cursorBlink 0.8s infinite;
+          margin-left: 2px;
+        }
+        .terminal-block-cursor {
+          display: inline-block;
+          color: #22d3ee;
+          animation: cursorBlink 0.6s infinite;
+          font-size: 0.9rem;
+        }
+      `}</style>
     </section>
   );
 }

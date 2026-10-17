@@ -1,6 +1,7 @@
 import React from 'react';
 import { portfolioData } from '../data/portfolioData';
 import { Award, ExternalLink, ShieldCheck, Trophy, Sparkles, BookOpen } from 'lucide-react';
+import { resolveAssetUrl } from '../utils';
 
 export default function Certifications() {
   const ms = portfolioData.microsoftLearn;
@@ -190,7 +191,7 @@ export default function Certifications() {
                     }}
                   >
                     <img
-                      src={cert.badgeImg}
+                      src={resolveAssetUrl(cert.badgeImg)}
                       alt={cert.title}
                       style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                       onError={(e) => {
