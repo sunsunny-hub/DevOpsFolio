@@ -11,22 +11,23 @@ import GitHubActivity from './components/GitHubActivity';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
+import BackgroundManager from './components/Background/BackgroundManager';
 
 export default function App() {
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
 
   return (
-    <div className="bg-grid-pattern" style={{ minHeight: '100vh', position: 'relative' }}>
-      {/* Dynamic ambient cloud glows */}
-      <div className="cloud-glow-1" />
-      <div className="cloud-glow-2" />
+    <div style={{ minHeight: '100vh', position: 'relative', backgroundColor: 'var(--bg-main)' }}>
+      {/* Living Multi-Cloud Background System */}
+      <BackgroundManager />
 
       {/* Main Navigation */}
-      <Navbar onOpenResume={() => setResumeModalOpen(true)} />
+      <div style={{ position: 'relative', zIndex: 10 }}>
+        <Navbar onOpenResume={() => setResumeModalOpen(true)} />
 
-      {/* Main Content Flow */}
-      <main>
-        <Hero onOpenResume={() => setResumeModalOpen(true)} />
+        {/* Main Content Flow */}
+        <main>
+          <Hero onOpenResume={() => setResumeModalOpen(true)} />
         <Certifications />
         <PipelineShowcase />
         <SkillsMatrix />
@@ -45,6 +46,7 @@ export default function App() {
         isOpen={resumeModalOpen}
         onClose={() => setResumeModalOpen(false)}
       />
+      </div>
     </div>
   );
 }
